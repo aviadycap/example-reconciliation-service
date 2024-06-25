@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.capitolis.eq</groupId>
+    <artifactId>eq-common-cash-reconciliation-service</artifactId>
+    <version>0.0.1</version>
+    <name>eq-common-cash-reconciliation-service</name>
+    <description>cash reconciliation service</description>
+
+    <parent>
+        <groupId>com.capitolis.core.services</groupId>
+        <artifactId>capitolis-service-parent</artifactId>
+        <version>2.7.18-4</version>
+    </parent>
+
+    <properties>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
+        <apache.poi.version>5.2.3</apache.poi.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.capitolis.core.services</groupId>
+            <artifactId>capitolis-service-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis.core.services</groupId>
+            <artifactId>capitolis-service-starter-postgres</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>audit</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis.core.lib</groupId>
+            <artifactId>capitolis-lib-starter-swagger-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis.core.services</groupId>
+            <artifactId>capitolis-service-starter-kafka-producer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>eq-common-financing-terms-lib</artifactId>
+            <version>1.18.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>cptls-interest</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>cptls-market-data-api-service-client</artifactId>
+            <version>2.10.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>eq-common-payment-schedule-service-client</artifactId>
+            <version>41.3.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>aws-commons</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>validations</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>commons</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis.eq</groupId>
+            <artifactId>eq-common-document-generation-service-client</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>cptls-state-machine-lib</artifactId>
+            <version>0.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>eq-common-financing-terms-service-client</artifactId>
+            <version>4.16.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${apache.poi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${apache.poi.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis.common</groupId>
+            <artifactId>static-data-management-client</artifactId>
+            <version>0.7.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.capitolis</groupId>
+            <artifactId>filter</artifactId>
+            <version>0.3.1-2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zonky.test</groupId>
+            <artifactId>embedded-postgres</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.zonky.test</groupId>
+            <artifactId>embedded-database-spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Releases</name>
+            <url>https://nexus.capitolis.com/repository/maven-releases</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/jacoco-report</outputDirectory>
+                            <excludes>
+                                <exclude>generated/**</exclude>
+                                <exclude>com/capitolis/generated/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>add-test-integration-source</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/test-integration/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-test-integration-resources</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>add-test-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/test-integration/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>readme</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>templates</directory>
+                                    <includes>
+                                        <include>README.md</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
